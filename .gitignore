@@ -33,3 +33,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 VRCade/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
