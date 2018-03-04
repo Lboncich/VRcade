@@ -21,7 +21,6 @@ public class TouchTrigger : MonoBehaviour {
         Debug.Log("Hmdah hmdah ultra omega tayay hmdah");
         if (obj.tag == "GameController" && buttonActive == false)
         {
-
             eventSys.SetSelectedGameObject(selectedButton);
             buttonActive = true;
         }
