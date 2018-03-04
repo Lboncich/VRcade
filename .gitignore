@@ -32,3 +32,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+VRCade/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
