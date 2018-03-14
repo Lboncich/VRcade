@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BowlingPin
   - BowlingBall
+  - Tutorial
   layers:
   - Default
   - TransparentFX
