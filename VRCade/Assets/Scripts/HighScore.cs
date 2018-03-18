@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class HighScore : MonoBehaviour {
+public class HighScore : MonoBehaviour, IComparable{
 
 	// Use this for initialization
 	void Start () {
@@ -14,7 +14,30 @@ public class HighScore : MonoBehaviour {
 	void Update () {
 		
 	}
-    
+
+    public int CompareTo(object obj)
+    {
+        HighScore hs= obj as HighScore;
+
+        if (this.Score > hs.Score)
+        {
+            return 1;
+        }else if(this.Score < hs.Score)
+        {
+            return -1;
+        }else if(this.Date > hs.Date)
+        {
+            return 1;
+        }else if (this.Date < hs.Date)
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
     public int Id { get; set; }
     public string PlayerName { get; set; }
     public int Score { get; set; }

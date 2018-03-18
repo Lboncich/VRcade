@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 //Needed to connect to database
 using System;
 using System.Data;
 using Mono.Data.Sqlite;
 
 
-public class DatabaseManager : MonoBehaviour {
+public class DatabaseManager {
 
     private string connectionString;
 
@@ -17,7 +18,7 @@ public class DatabaseManager : MonoBehaviour {
     private List<HighScore> highScoreList = new List<HighScore>();
 
 	// Use this for initialization
-	void Start () {
+	public void Initialize() {
 
         //ActiveScene
         scene = SceneManager.GetActiveScene();
@@ -26,11 +27,7 @@ public class DatabaseManager : MonoBehaviour {
         //GetScore();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    /// <summary>
+	/// <summary>
     /// Method to extract score from the database
     /// </summary>
     private void GetScore()
@@ -95,6 +92,17 @@ public class DatabaseManager : MonoBehaviour {
                 
             }
         }
+
+		if (highScoreList.Count <= 20) {
+			//sort the scores inorder to remove scores more than 20
+			highScoreList.Sort ();
+
+			//playerID of the last highscore in the table
+			int playerID = highScoreList [highScoreList.Count - 1].Id;
+
+			RemoveScore (playerID);
+		}
+
     }
 
     /// <summary>
@@ -124,11 +132,29 @@ public class DatabaseManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Display the scores 
+    /// Return the top 20 high scores.
     /// </summary>
-    private void DisplayScores()
+    /// <returns></returns>
+    public IEnumerable<HighScore> GetHighScoreList()
     {
-
+        highScoreList.Sort();
+        return highScoreList;
     }
 
+	/// <summary>
+	/// Checks if the score provided is high enough to make to high score
+	/// </summary>
+	/// <returns><c>true</c>, if score is high enouhg, <c>false</c> otherwise.</returns>
+	/// <param name="score"> score obtained by the user</param>
+	public Boolean IsHighScore(int score){
+
+		GetScore ();
+		foreach (HighScore highscore in highScoreList){
+			if(score>=highscore.Id){
+				return true;
+			}
+			
+		}
+        return false;
+    }
 }
