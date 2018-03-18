@@ -1,12 +1,13 @@
 ﻿using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class AudioManager : MonoBehaviour
 {
     //list of sounds that are selected to be played
     public Sound[] sounds;
-
+    public Slider volumeSlider;
     //instance of the AudioManager object. There should not be more than one audiomanager in the game 
     //even when the scenes change
     public static AudioManager instance;
@@ -50,9 +51,12 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("Here");
-        Play("theme 1");
+        Play("theme");
     }
-
+    void Update()
+    {
+        changeMasterVolume("theme");
+    }
     //Method called to play the sound based on the fileName provided
     public void Play(string soundName)
     {
@@ -63,6 +67,11 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+    void changeMasterVolume(string soundName)
+    {
+        Sound mvs = Array.Find(sounds, sound => sound.name == soundName);
+        mvs.source.volume = volumeSlider.value;
     }
 }
 

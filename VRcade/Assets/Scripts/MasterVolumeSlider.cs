@@ -7,8 +7,8 @@ public class MasterVolumeSlider : MonoBehaviour {
 
     public Slider volumeSlider;
     public AudioSource masterVolume;
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         masterVolume.volume = volumeSlider.value;
 	}
 }

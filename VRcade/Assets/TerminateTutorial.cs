@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRTK;
 public class TerminateTutorial : MonoBehaviour {
-
     public VRTK_ControllerEvents rightController;
     public Canvas tutCanvas;
+    private static bool switcher = true;
 	// Use this for initialization
 
 	// Update is called once per frame
 	void Update () {
-	}
-    void terminateTutorial()
-    {
-        if(rightController.buttonOnePressed == true)
+        if (rightController.buttonOnePressed == true && switcher == true)
         {
-            tutCanvas.gameObject.SetActive() = false;
+            switcher = false;
+            tutCanvas.gameObject.SetActive(false);
         }
     }
+    //void terminateTutorial()
+    //{
+        
+    //}
 }
