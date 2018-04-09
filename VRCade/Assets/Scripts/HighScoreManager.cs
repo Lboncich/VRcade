@@ -9,7 +9,8 @@ using System.Data;
 using Mono.Data.Sqlite;
 
 
-public class DatabaseManager {
+public class HighScoreManager : MonoBehaviour
+{
 
     private string connectionString;
 
@@ -17,17 +18,23 @@ public class DatabaseManager {
 
     private List<HighScore> highScoreList = new List<HighScore>();
 
-	// Use this for initialization
-	public void Initialize() {
+    public GameObject scorePrefab;
+
+    public Transform scoreParent;
+
+    // Use this for initialization
+    public void Initialize()
+    {
 
         //ActiveScene
         scene = SceneManager.GetActiveScene();
         //path to the database
         connectionString = "URI=file:" + Application.dataPath + "/Scripts/HighScore.sqlite";
-        //GetScore();
-	}
-	
-	/// <summary>
+
+        ShowScores();
+    }
+
+    /// <summary>
     /// Method to extract score from the database
     /// </summary>
     private void GetScore()
@@ -43,7 +50,7 @@ public class DatabaseManager {
             //creating command
             using (IDbCommand dbCmd = dbConnection.CreateCommand())
             {
-                string query = "SELECT * FROM "+ scene.name;
+                string query = "SELECT * FROM " + scene.name;
 
                 dbCmd.CommandText = query;
 
@@ -52,19 +59,19 @@ public class DatabaseManager {
                 {
                     while (reader.Read())
                     {
-                        highScoreList.Add(new HighScore(reader.GetInt32(0), reader.GetString(1), 
+                        highScoreList.Add(new HighScore(reader.GetInt32(0), reader.GetString(1),
                             reader.GetInt32(2), reader.GetDateTime(3)));
                     }
 
                     reader.Close();
                     dbConnection.Close();
-                    
+
                 }
             }
         }
-            
 
-        
+
+
     }
 
     /// <summary>
@@ -84,24 +91,25 @@ public class DatabaseManager {
             {
                 string query = String.Format("INSERT INTO \"{0}\"(Name,Score)" +
                     "VALUES(\"{1}\",\"{2}\")", scene.name, playerName, score);
-                
+
                 //execute command
                 dbCmd.CommandText = query;
                 dbCmd.ExecuteScalar();
                 dbConnection.Close();
-                
+
             }
         }
 
-		if (highScoreList.Count <= 20) {
-			//sort the scores inorder to remove scores more than 20
-			highScoreList.Sort ();
+        if (highScoreList.Count <= 20)
+        {
+            //sort the scores inorder to remove scores more than 20
+            highScoreList.Sort();
 
-			//playerID of the last highscore in the table
-			int playerID = highScoreList [highScoreList.Count - 1].Id;
+            //playerID of the last highscore in the table
+            int playerID = highScoreList[highScoreList.Count - 1].Id;
 
-			RemoveScore (playerID);
-		}
+            RemoveScore(playerID);
+        }
 
     }
 
@@ -141,20 +149,41 @@ public class DatabaseManager {
         return highScoreList;
     }
 
-	/// <summary>
-	/// Checks if the score provided is high enough to make to high score
-	/// </summary>
-	/// <returns><c>true</c>, if score is high enouhg, <c>false</c> otherwise.</returns>
-	/// <param name="score"> score obtained by the user</param>
-	public Boolean IsHighScore(int score){
+    /// <summary>
+    /// Checks if the score provided is high enough to make to high score
+    /// </summary>
+    /// <returns><c>true</c>, if score is high enouhg, <c>false</c> otherwise.</returns>
+    /// <param name="score"> score obtained by the user</param>
+    public Boolean IsHighScore(int score)
+    {
 
-		GetScore ();
-		foreach (HighScore highscore in highScoreList){
-			if(score>=highscore.Id){
-				return true;
-			}
-			
-		}
+        GetScore();
+        foreach (HighScore highscore in highScoreList)
+        {
+            if (score >= highscore.Id)
+            {
+                return true;
+            }
+
+        }
         return false;
+    }
+
+    /// <summary>
+    /// To assign scores from database to the score prefab and display it 
+    /// </summary>
+    private void ShowScores()
+    {
+        for (int i = 0; i < highScoreList.Count; i++)
+        {
+            GameObject tempObject = GameObject.Instantiate(scorePrefab);
+
+            HighScore tempScore = highScoreList[i];
+
+            tempObject.GetComponent<HighScoreScript>().SetScore((i + 1).ToString(), tempScore.PlayerName, tempScore.Score.ToString());
+
+            //set the parent of each score to be "SCORES" object so everything is under it
+            tempObject.transform.SetParent(scoreParent);
+        }
     }
 }
