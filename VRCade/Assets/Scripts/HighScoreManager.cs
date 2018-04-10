@@ -15,6 +15,7 @@ public class HighScoreManager : MonoBehaviour
     private string connectionString;
 
     private Scene scene;
+    private string tableName;
 
     private List<HighScore> highScoreList = new List<HighScore>();
 
@@ -23,14 +24,27 @@ public class HighScoreManager : MonoBehaviour
     public Transform scoreParent;
 
     // Use this for initialization
-    public void Initialize()
+    public void Start()
     {
 
         //ActiveScene
         scene = SceneManager.GetActiveScene();
-        //path to the database
-        connectionString = "URI=file:" + Application.dataPath + "/Scripts/HighScore.sqlite";
 
+        //Determine the tablename
+        if (scene.name == "BowlingScene")
+        {
+            tableName = "Bowling";
+        }
+        else
+        {
+            tableName = "";
+        }
+
+        Debug.Log("Database Manager Started");
+        //path to the database
+        connectionString = "URI=file:" + Application.dataPath + "/HighScore.s3db";
+        
+        
         ShowScores();
     }
 
@@ -41,19 +55,18 @@ public class HighScoreManager : MonoBehaviour
     {
         //Clear the list
         highScoreList.Clear();
-
+        
         using (IDbConnection dbConnection = new SqliteConnection(connectionString))
         {
             //open the database
             dbConnection.Open();
-
+            
             //creating command
             using (IDbCommand dbCmd = dbConnection.CreateCommand())
             {
-                string query = "SELECT * FROM " + scene.name;
-
+                string query = "SELECT * FROM " + tableName;
                 dbCmd.CommandText = query;
-
+                
                 //executes the command and saves it to the reader
                 using (IDataReader reader = dbCmd.ExecuteReader())
                 {
@@ -90,7 +103,7 @@ public class HighScoreManager : MonoBehaviour
             using (IDbCommand dbCmd = dbConnection.CreateCommand())
             {
                 string query = String.Format("INSERT INTO \"{0}\"(Name,Score)" +
-                    "VALUES(\"{1}\",\"{2}\")", scene.name, playerName, score);
+                    "VALUES(\"{1}\",\"{2}\")", tableName, playerName, score);
 
                 //execute command
                 dbCmd.CommandText = query;
@@ -100,7 +113,7 @@ public class HighScoreManager : MonoBehaviour
             }
         }
 
-        if (highScoreList.Count <= 20)
+        if (highScoreList.Count > 20)
         {
             //sort the scores inorder to remove scores more than 20
             highScoreList.Sort();
