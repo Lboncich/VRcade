@@ -43,8 +43,9 @@ public class HighScoreManager : MonoBehaviour
         Debug.Log("Database Manager Started");
         //path to the database
         connectionString = "URI=file:" + Application.dataPath + "/HighScore.s3db";
-        
-        
+
+        GetScore();
+
         ShowScores();
     }
 
@@ -194,7 +195,6 @@ public class HighScoreManager : MonoBehaviour
             HighScore tempScore = highScoreList[i];
 
             tempObject.GetComponent<HighScoreScript>().SetScore((i + 1).ToString(), tempScore.PlayerName, tempScore.Score.ToString());
-
             //set the parent of each score to be "SCORES" object so everything is under it
             tempObject.transform.SetParent(scoreParent);
         }

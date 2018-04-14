@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class HighScoreScript : MonoBehaviour {
 
-    public GameObject score;
-    public GameObject playerName;
-    public GameObject rank;
+    public GameObject Score;
+    public GameObject Name;
+    public GameObject Rank;
 
     public void SetScore(string rank, string name, string score)
     {
-        this.rank.GetComponent<Text>().text = rank;
-        this.playerName.GetComponent<Text>().text = name;
-        this.score.GetComponent<Text>().text = score;
+        
+        this.Name.GetComponent<Text>().text = name;
+        this.Score.GetComponent<Text>().text = score;
+        this.Rank.GetComponent<Text>().text = rank;
     }
 }
