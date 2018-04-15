@@ -56,18 +56,18 @@ public class HighScoreManager : MonoBehaviour
     {
         //Clear the list
         highScoreList.Clear();
-        
+
         using (IDbConnection dbConnection = new SqliteConnection(connectionString))
         {
             //open the database
             dbConnection.Open();
-            
+
             //creating command
             using (IDbCommand dbCmd = dbConnection.CreateCommand())
             {
                 string query = "SELECT * FROM " + tableName;
                 dbCmd.CommandText = query;
-                
+
                 //executes the command and saves it to the reader
                 using (IDataReader reader = dbCmd.ExecuteReader())
                 {
@@ -194,9 +194,24 @@ public class HighScoreManager : MonoBehaviour
 
             HighScore tempScore = highScoreList[i];
 
+            var nameObject = tempObject.GetComponentInChildren<Transform>().Find("Name").gameObject;
+            var rankObject = tempObject.GetComponentInChildren<Transform>().Find("Rank").gameObject;
+            var scoreObject = tempObject.GetComponentInChildren<Transform>().Find("Score").gameObject;
+            tempObject.GetComponent<HighScoreScript>().Assign(rankObject, nameObject, scoreObject);
+
             tempObject.GetComponent<HighScoreScript>().SetScore((i + 1).ToString(), tempScore.PlayerName, tempScore.Score.ToString());
+            //
             //set the parent of each score to be "SCORES" object so everything is under it
             tempObject.transform.SetParent(scoreParent);
+
+
+            tempObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
+            var xPosition = tempObject.transform.position.x;
+            var yPosition = tempObject.transform.position.y;
+            var zPosition = 0;
+
+            tempObject.GetComponent<RectTransform>().localPosition = new Vector3(xPosition, yPosition, zPosition);
         }
     }
 }
