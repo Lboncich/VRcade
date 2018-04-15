@@ -9,13 +9,6 @@ public class HighScoreScript : MonoBehaviour {
     public GameObject Name;
     public GameObject Rank;
 
-    public void Assign(GameObject rank, GameObject name, GameObject score)
-    {
-        Score = score;
-        Name = name;
-        Rank = rank;
-    }
-
     public void SetScore(string rank, string name, string score)
     {
         
