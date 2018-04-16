@@ -24,14 +24,14 @@ public class EventListener : MonoBehaviour
         private void DoButtonOneTouchStart(object sender, ControllerInteractionEventArgs e)
         {
   
-        Destroy(GameObject.FindGameObjectWithTag("BowlingBall"));
-        int rndint= rnd.Next(0, 1);
-        Debug.Log(rndint);
-       GameObject randomBB = bbs[rndint];
+            Destroy(GameObject.FindGameObjectWithTag("BowlingBall"));
+            int rndint= rnd.Next(0, 1);
+            Debug.Log(rndint);
+            GameObject randomBB = bbs[rndint];
             
         
-        Instantiate(randomBB, new Vector3(-0.5f,1.0f, -2.755f), Quaternion.identity);
-        DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "touched", e);
+            Instantiate(randomBB, new Vector3(-0.626f, 1.357f, -2.76f), Quaternion.identity);
+            DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "touched", e);
         }
 
         private void DoButtonOneTouchEnd(object sender, ControllerInteractionEventArgs e)
