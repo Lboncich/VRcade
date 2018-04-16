@@ -5,6 +5,10 @@ using UnityEngine;
 public class BowlingPin : MonoBehaviour
 {
 
+
+    //
+    public AudioSource hitSource;
+    //
     public Transform pin;
     public float threshhold = .6f;
     public int point = 1;
@@ -16,21 +20,29 @@ public class BowlingPin : MonoBehaviour
 
     void Start()
     {
-
+        hitSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-  
+
         if (pin.up.y < threshhold)
         {
             //add score
             Debug.Log("Pin is Down");
-   
+
             isDown = true;
         }
-        }
+    }
+
+    void OnCollisionEnter (Collision collision)
+    {
+       
+                    hitSource.Play();
+            Debug.Log("hello");
+        
+    }
      
     }
 

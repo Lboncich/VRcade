@@ -30,7 +30,7 @@ public class EventListener : MonoBehaviour
        GameObject randomBB = bbs[rndint];
             
         
-        Instantiate(randomBB, new Vector3(-0.557f,1.0f, -1.145f), Quaternion.identity);
+        Instantiate(randomBB, new Vector3(-0.5f,1.0f, -2.755f), Quaternion.identity);
         DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "touched", e);
         }
 
