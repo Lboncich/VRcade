@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BowlingScene.unity
     guid: 539a40ce624afa04f9cedd095581ad02
+  - enabled: 1
+    path: Assets/Archery Assets/forestScene.unity
+    guid: b004c7132985c2b46b46ab65637db14d
