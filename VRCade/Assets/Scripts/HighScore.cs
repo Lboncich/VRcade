@@ -38,19 +38,19 @@ public class HighScore : MonoBehaviour, IComparable
     {
         HighScore hs = obj as HighScore;
 
-        if (this.Score > hs.Score)
+        if (this.Score < hs.Score)
         {
             return 1;
         }
-        else if (this.Score < hs.Score)
+        else if (this.Score > hs.Score)
         {
             return -1;
         }
-        else if (this.Date > hs.Date)
+        else if (this.Date < hs.Date)
         {
             return 1;
         }
-        else if (this.Date < hs.Date)
+        else if (this.Date > hs.Date)
         {
             return -1;
         }
