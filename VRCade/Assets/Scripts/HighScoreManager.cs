@@ -84,6 +84,8 @@ public class HighScoreManager : MonoBehaviour
             }
         }
 
+        //sort the scores inorder to remove scores more than 20
+        highScoreList.Sort();
 
 
     }
@@ -116,9 +118,7 @@ public class HighScoreManager : MonoBehaviour
 
         if (highScoreList.Count > 20)
         {
-            //sort the scores inorder to remove scores more than 20
-            highScoreList.Sort();
-
+            
             //playerID of the last highscore in the table
             int playerID = highScoreList[highScoreList.Count - 1].Id;
 

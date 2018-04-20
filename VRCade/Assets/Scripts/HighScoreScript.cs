@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,13 +16,13 @@ public class HighScoreScript : MonoBehaviour
         Score = score;
         Name = name;
         Rank = rank;
+        
     }
 
     public void SetScore(string rank, string name, string score)
     {
-
-        this.Name.GetComponent<Text>().text = name;
-        this.Score.GetComponent<Text>().text = score;
-        this.Rank.GetComponent<Text>().text = rank;
+        this.Name.GetComponent<TextMeshProUGUI>().text = name;
+        this.Score.GetComponent<TextMeshProUGUI>().text = score;
+        this.Rank.GetComponent<TextMeshProUGUI>().text = rank;
     }
 }
