@@ -15,11 +15,12 @@ public class HighScoreScript : MonoBehaviour
         Score = score;
         Name = name;
         Rank = rank;
+        
     }
 
     public void SetScore(string rank, string name, string score)
     {
-
+        Debug.Log(name);
         this.Name.GetComponent<Text>().text = name;
         this.Score.GetComponent<Text>().text = score;
         this.Rank.GetComponent<Text>().text = rank;
