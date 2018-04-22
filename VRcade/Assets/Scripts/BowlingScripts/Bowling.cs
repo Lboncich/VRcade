@@ -32,7 +32,7 @@ public class Bowling : MonoBehaviour
     }
     private void addFrame(Frame f)
     {
-
+        frames.Add(f);
     }
     /// <summary>
     /// A spare has a retrospective update of score
@@ -56,5 +56,10 @@ public class Bowling : MonoBehaviour
     private int strikeUpdate(Frame f)
     {
         return 0;
+    }
+    public void startFirstFrame()
+    {
+        Frame start = new Frame(0);//0th frame == first frame DUH!
+        addFrame(start);            //put the beginning frame in list
     }
 }

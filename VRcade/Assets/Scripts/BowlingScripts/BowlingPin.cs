@@ -10,7 +10,8 @@ public class BowlingPin : MonoBehaviour
     public AudioSource hitSource;
     //
     public Transform pin;
-    public float threshhold = .6f;
+    //threshold is how far the pin must fall in order to count as being downed
+    public float threshhold = .7f;
     public int point = 1;
     public bool isDown = false;
     public bool isChecked = false;
@@ -38,11 +39,10 @@ public class BowlingPin : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {
-       
-                    hitSource.Play();
-            Debug.Log("hello");
+        hitSource.Play();
+        Debug.Log("hello");
         
     }
      
-    }
+}
 

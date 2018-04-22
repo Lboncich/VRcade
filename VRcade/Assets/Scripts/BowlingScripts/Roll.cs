@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Roll : MonoBehaviour {
+    public Pins currentPins = new Pins();
     private int pinsHit { get; set; }
     private bool isStrike;
 	// Use this for initialization
@@ -14,4 +15,15 @@ public class Roll : MonoBehaviour {
 	void Update () {
 		
 	}
+    public int rollBall()
+    {
+        pinsHit = currentPins.numPinsDown;
+        if (pinsHit == 10)
+            isStrike = true;
+        return pinsHit;
+    }
+    public bool getIsStrike()
+    {
+        return isStrike; 
+    }
 }

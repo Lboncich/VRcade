@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour {
     Bowling fullGame;
 	// Use this for initialization
 	void Start () {
-		
+        fullGame = new global::Bowling();
+        fullGame.startFirstFrame();
 	}
 	
 	// Update is called once per frame
