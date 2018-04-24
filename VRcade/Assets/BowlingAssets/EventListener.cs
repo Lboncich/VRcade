@@ -7,7 +7,8 @@ using System;
 
 public class EventListener : MonoBehaviour
     {
-    public GameObject bb;
+
+    public BowlingBall bb;
     public List<GameObject> bbs;
     System.Random rnd = new System.Random();
     private void Start()
@@ -20,17 +21,22 @@ public class EventListener : MonoBehaviour
         }
         GetComponent<VRTK_ControllerEvents>().ButtonOneTouchStart += new ControllerInteractionEventHandler(DoButtonOneTouchStart);
         GetComponent<VRTK_ControllerEvents>().ButtonOneTouchEnd += new ControllerInteractionEventHandler(DoButtonOneTouchEnd);
+
+
     }
         private void DoButtonOneTouchStart(object sender, ControllerInteractionEventArgs e)
         {
-  
-            Destroy(GameObject.FindGameObjectWithTag("BowlingBall"));
+
+           
+            GameObject ball = GameObject.FindGameObjectWithTag("BowlingBall");
             int rndint= rnd.Next(0, 1);
             Debug.Log(rndint);
             GameObject randomBB = bbs[rndint];
-            
-        
-            Instantiate(randomBB, new Vector3(-0.626f, 1.357f, -2.76f), Quaternion.identity);
+      
+        bb.reset();
+
+
+
             DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "touched", e);
         }
 
