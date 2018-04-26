@@ -2,28 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roll : MonoBehaviour {
-    public Pins currentPins = new Pins();
-    private int pinsHit { get; set; }
-    private bool isStrike;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    public int rollBall()
+public class Roll
+{
+    private int mPinsHit;
+
+    private bool mIsGutter;
+
+    private int mFrameNumber;
+
+    public int PinsHit
     {
-        pinsHit = currentPins.numPinsDown;
-        if (pinsHit == 10)
-            isStrike = true;
-        return pinsHit;
+        get
+        {
+            return mPinsHit;
+        }
+        private set
+        {
+            mPinsHit = value;
+            IsGutter = (value > 0) ? false : true;
+        }
     }
-    public bool getIsStrike()
+
+    public bool IsGutter
     {
-        return isStrike; 
+        get
+        {
+            return mIsGutter;
+        }
+        private set
+        {
+            mIsGutter = value;
+        }
+    }
+
+    public int FrameNumber
+    {
+        get
+        {
+            return mFrameNumber;
+        }
+        private set
+        {
+            mFrameNumber = value;
+        }
+    }
+
+    public Roll(int frameNumber)
+    {
+        FrameNumber = frameNumber;
+    }
+
+    public void HitPins(int numPins)
+    {
+        PinsHit = numPins;
     }
 }

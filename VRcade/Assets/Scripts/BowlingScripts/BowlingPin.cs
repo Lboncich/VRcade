@@ -31,7 +31,7 @@ public class BowlingPin : MonoBehaviour
         if (pin.up.y < threshhold)
         {
             //add score
-            Debug.Log("Pin is Down");
+            //Debug.Log("Pin is Down");
 
             isDown = true;
         }

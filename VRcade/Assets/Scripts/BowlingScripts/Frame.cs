@@ -2,65 +2,137 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frame : MonoBehaviour {
-    private Roll[] rolls;
-    private Roll currentRoll;        //between 0 and 1
-    private int frameNumber { get; set; }   //between 0 and 11
-    private int frameScore { get; set; }    //current Frame's score, not total score    
-    private bool isSpare;                   //not sure if i should do previous frames spare or strike or current frame
-    private bool isStrike;                  //ditto
-    public Frame(int num)
-    {
-        currentRoll = new Roll();
-        rolls[0] = currentRoll;
-        rolls[1] = null;        //null because this is the beginning of a frame
-        frameNumber = num;
-        frameScore = 0;
-    }
-                                    // Use this for initialization
-    void Start () {
+public class Frame
+{
+    private Roll[] mRollList;
+    private int mFrameScore;
+    private bool mIsSpare;
+    private bool mIsStrike;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    public int getFrameNumber()
+    private int currentRoll;
+
+    public int FrameScore
     {
-        return frameNumber;
+        get
+        {
+
+            return mFrameScore;
+
+        }
+        set
+        {
+            mFrameScore = value;
+        }
     }
-    public void setFrameNumber(int num)
+
+    public int FrameNumber
     {
-        frameNumber = num;
+        get; set;
     }
-    public int getFrameScore()
+
+    public bool IsSpare
     {
-        return frameScore;
+        get
+        {
+            return mIsSpare;
+        }
+        set
+        {
+            mIsSpare = value;
+        }
     }
-    public void setFrameScore(int num)
+
+    public bool IsStrike
     {
-        frameScore = num;
+        get
+        {
+            return mIsStrike;
+        }
+        set
+        {
+            mIsStrike = value;
+        }
     }
-    public void incrementFrameScore(int num)
+
+    public int CurrentRoll
     {
-        frameScore += num;
+        get
+        {
+            return currentRoll;
+        }
+        private set
+        {
+            currentRoll = value;
+        }
     }
-    public Roll getCurrentRoll()
+    public Frame(int frameNumber)
     {
-        return currentRoll;
+        mRollList = new Roll[2];
+        for (int i = 0; i < 2; i++)
+        {
+            mRollList[i] = new Roll(FrameNumber);
+        }
+        FrameNumber = frameNumber;
+        CurrentRoll = 0;
     }
-    public bool determineSpare()
+
+    public void Roll(int pinNumbers)
     {
-        if (rolls[1] != null && frameScore == 10) //meaning a 2nd roll happened this frame
-            isSpare = true;
+        mRollList[CurrentRoll].HitPins(pinNumbers);
+
+        if (CurrentRoll == 0)
+        {
+            DetermineStrike();
+            if (IsStrike)
+            {
+                CurrentRoll += 2;
+            }
+            else
+            {
+                currentRoll++;
+            }
+        }
         else
-            isSpare = false;
-        return isSpare;
+        {
+            DetermineSpare();
+            CurrentRoll++;
+        }
+        CalculateRollTotal();
+
     }
-    public bool getStrike()
+
+    private void CalculateRollTotal()
     {
-        isStrike = currentRoll.getIsStrike();
-        return isStrike;
+        int score = 0;
+        for (int i = 0; i < 2; i++)
+        {
+            score += mRollList[i].PinsHit;
+        }
+
+        FrameScore = score;
+    }
+
+    public void UpdateScore(int previousFrameScore, int bonusPoint = 0)
+    {
+        int rollTotal = FrameScore;
+        FrameScore = rollTotal + previousFrameScore + bonusPoint;
+    }
+
+    public bool IsRollGutter(int rollNumber)
+    {
+        return mRollList[rollNumber].IsGutter;
+    }
+
+
+    private void DetermineStrike()
+    {
+        IsStrike = mRollList[0].PinsHit == 10 ? true : false;
+    }
+
+    private void DetermineSpare()
+    {
+        IsSpare = (mRollList[0].PinsHit + mRollList[1].PinsHit) == 10 ?
+            true : false;
     }
 }
+

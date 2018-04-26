@@ -7,7 +7,10 @@ public class Pins : MonoBehaviour {
 
     private List<Transform> pins = new List<Transform>();
     private List<Vector3> startPos = new List<Vector3>();
-    public int numPinsDown;
+
+    private GameManager gm;
+
+    private int numPinsDown;
     public Text textBox;
     //private bool isChecked = false;
     GameObject bowlingBall;
@@ -21,12 +24,13 @@ public class Pins : MonoBehaviour {
             pins.Add(child);
         }
 
+        gm = new GameManager();
     }
     // GetComponent<BowlingBall>().transform.position.
     // Update is called once per frame !isChecked &&
     void Update() {
 
-        Invoke("CheckPins", 5f);
+        CheckPins();
         ////if (bowlingBall.transform.position.z < 5f)
         ////{
         ////    Invoke("CheckPins", 5f);//check pins after 5 seconds
@@ -46,10 +50,10 @@ public class Pins : MonoBehaviour {
                 child.GetComponent<BowlingPin>().isChecked = true;
                 StartCoroutine(setPinsActive(child));
                 numPinsDown++;
-                textBox.text = "Score:" + numPinsDown;
+                //textBox.text = "Score:" + numPinsDown;
             }
         }
-       
+        
     }
     IEnumerator setPinsActive(Transform child)
     {
@@ -72,9 +76,12 @@ public class Pins : MonoBehaviour {
         //}
         for (int i = 0; i < pins.Count; i++)
         {
+         
             pins[i].position = startPos[i];
             pins[i].rotation = Quaternion.identity;
+            pins[i].GetComponent<BowlingPin>().isChecked = false;
             pins[i].gameObject.SetActive(true);
+       
 
 
             //for (int i = 0; i < pins.Count; i++)
