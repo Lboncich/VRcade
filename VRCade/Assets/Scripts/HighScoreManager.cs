@@ -20,7 +20,7 @@ public class HighScoreManager : MonoBehaviour
     private List<HighScore> highScoreList = new List<HighScore>();
 
     public GameObject scorePrefab;
-
+    
     public Transform scoreParent;
 
     // Use this for initialization
@@ -44,8 +44,7 @@ public class HighScoreManager : MonoBehaviour
         //path to the database
         connectionString = "URI=file:" + Application.dataPath + "/HighScore.s3db";
 
-        GetScore();
-
+        
         ShowScores();
     }
 
@@ -95,7 +94,7 @@ public class HighScoreManager : MonoBehaviour
     /// </summary>
     /// <param name="playerName"> Name of the player</param>
     /// <param name="score"> Score received </param>
-    private void InsertScore(string playerName, int score)
+    public void InsertScore(string playerName, int score)
     {
         using (IDbConnection dbConnection = new SqliteConnection(connectionString))
         {
@@ -141,8 +140,8 @@ public class HighScoreManager : MonoBehaviour
             //creating command
             using (IDbCommand dbCmd = dbConnection.CreateCommand())
             {
-                string query = String.Format("DELETE FROM \"{0}\" WHERE" +
-                    "id = \"{0}\"", playerID);
+                string query = String.Format("DELETE FROM \"{0}\" WHERE " +
+                    "id = \"{1}\"", tableName,playerID);
 
                 //execute command
                 dbCmd.CommandText = query;
@@ -186,8 +185,12 @@ public class HighScoreManager : MonoBehaviour
     /// <summary>
     /// To assign scores from database to the score prefab and display it 
     /// </summary>
-    private void ShowScores()
+    public void ShowScores()
     {
+
+        GetScore();
+        DeleteChildren();
+
         for (int i = 0; i < highScoreList.Count; i++)
         {
             GameObject tempObject = GameObject.Instantiate(scorePrefab);
@@ -212,6 +215,18 @@ public class HighScoreManager : MonoBehaviour
             var zPosition = 0;
 
             tempObject.GetComponent<RectTransform>().localPosition = new Vector3(xPosition, yPosition, zPosition);
+        }
+       
+    }
+
+    /// <summary>
+    /// Destroy all existing child object before adding
+    /// </summary>
+    private void DeleteChildren()
+    {
+        foreach (Transform child in scoreParent)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

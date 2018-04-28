@@ -1,31 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class KeyboardScript : MonoBehaviour {
 
-    // Use this for initialization
-    //public Button button = null;
-    
-    public string Name;
-    public Text texbox;
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        Debug.Log(Name);
-	}
+    private string Name;
+    public TextMeshProUGUI text;
 
+    /// <summary>
+    /// Get the button's text
+    /// </summary>
+    /// <param name="b"></param>
     public void getText(Button b)
     {
-        Name += b.name;
-        texbox.text += name;
-        //Debug.Log(b.name);
-      //  string text = b.GetComponentInChildren<Text>().text.ToString();
+        text.text += b.name;
+    }
 
-        //Debug.Log(text);
+    /// <summary>
+    /// Method that acts as a backspace
+    /// </summary>
+    public void BackspaceText()
+    {
+        string temp = text.text;
+        temp=temp.Substring(0, temp.Length - 1);
+        text.text = temp;
+    }
+
+    /// <summary>
+    /// Record the score in the HighScore Canvas
+    /// </summary>
+    public void EnterName()
+    {
+        string playerName = text.text.Substring(0, 5);
+        FindObjectOfType<HighScoreManager>().InsertScore(playerName, 700);
+        //FindObjectOfType<HighScoreManager>().GetScore();
+        FindObjectOfType<HighScoreManager>().ShowScores();
     }
 }
