@@ -224,6 +224,7 @@ public class HighScoreManager : MonoBehaviour
     /// </summary>
     private void DeleteChildren()
     {
+
         foreach (Transform child in scoreParent)
         {
             Destroy(child.gameObject);

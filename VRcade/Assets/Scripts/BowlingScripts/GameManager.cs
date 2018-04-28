@@ -4,23 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    //private Bowling fullGame;
-    private GameObject bowlingball;
+    
     public GameObject region;
 
     private bool isLegal;
+    private Frame[] frameList = new Frame[10];
+    private bool IsBonusCalculationDone = true;
+    private int bonusPoint = 0;
+    private int index = 0;
 
     public bool IsLegal
     {
         get; private set;
     }
 
-    private Frame[] frameList = new Frame[10];
-
-    private bool IsBonusCalculationDone = true;
-    private int bonusPoint = 0;
-
-    private int index = 0;
     public int CurrentRoll
     {
         get; private set;
@@ -51,7 +48,8 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        bowlingball = GameObject.Find("Bowling_Ball");
+
+        GameObject bowlingball = GameObject.Find("Bowling_Ball");
         if (bowlingball.transform.position.z < region.transform.position.z)//bowling ball is in legal boundary
         {
             IsLegal = true;

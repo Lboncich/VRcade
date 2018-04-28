@@ -40,7 +40,6 @@ public class BowlingPin : MonoBehaviour
     void OnCollisionEnter (Collision collision)
     {
         hitSource.Play();
-        Debug.Log("hello");
         
     }
      

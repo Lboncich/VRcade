@@ -33,7 +33,7 @@ public class KeyboardScript : MonoBehaviour {
     /// </summary>
     public void EnterName()
     {
-        string playerName = text.text.Substring(0, 5);
+        string playerName = text.text.Length > 5 ? text.text.Substring(0, 5) : text.text;
         FindObjectOfType<HighScoreManager>().InsertScore(playerName, 700);
         //FindObjectOfType<HighScoreManager>().GetScore();
         FindObjectOfType<HighScoreManager>().ShowScores();
