@@ -20,11 +20,13 @@ public class BowlingBall : MonoBehaviour {
 
     }
 
-   public void reset()
+   public void Reset()
     {
+        Debug.Log("I was resetted");
         GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         transform.position = startPosition;
+        Debug.Log(transform.position);
     }
         
 

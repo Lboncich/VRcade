@@ -9,8 +9,9 @@ public class EventListener : MonoBehaviour
     {
 
     public BowlingBall bb;
-    public List<GameObject> bbs;
-    System.Random rnd = new System.Random();
+    //public List<GameObject> bbs;
+    //System.Random rnd = new System.Random();
+
     private void Start()
     {
         
@@ -28,12 +29,13 @@ public class EventListener : MonoBehaviour
         {
 
            
-            GameObject ball = GameObject.FindGameObjectWithTag("BowlingBall");
-            int rndint= rnd.Next(0, 1);
-            Debug.Log(rndint);
-            GameObject randomBB = bbs[rndint];
-      
-        bb.reset();
+            //GameObject ball = GameObject.FindGameObjectWithTag("BowlingBall");
+            //int rndint= rnd.Next(0, 2);
+            //Debug.Log(rndint);
+        //GameObject randomBB = bbs[rndint];
+        //bb = bbs[rndint];
+        //Debug.Log("Where");
+        //bb.Reset();
 
 
 
