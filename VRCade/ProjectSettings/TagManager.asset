@@ -7,6 +7,7 @@ TagManager:
   - BowlingPin
   - BowlingBall
   - Tutorial
+  - Quit Button
   layers:
   - Default
   - TransparentFX
