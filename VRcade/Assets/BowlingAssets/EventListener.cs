@@ -39,12 +39,12 @@ public class EventListener : MonoBehaviour
 
 
 
-            DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "touched", e);
+           // DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "touched", e);
         }
 
         private void DoButtonOneTouchEnd(object sender, ControllerInteractionEventArgs e)
         {
-            DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "untouched", e);
+            //DebugLogger(VRTK_ControllerReference.GetRealIndex(e.controllerReference), "BUTTON ONE", "untouched", e);
         }
     private void DebugLogger(uint index, string button, string action, ControllerInteractionEventArgs e)
     {

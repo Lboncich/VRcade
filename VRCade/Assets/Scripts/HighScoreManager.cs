@@ -173,7 +173,7 @@ public class HighScoreManager : MonoBehaviour
         GetScore();
         foreach (HighScore highscore in highScoreList)
         {
-            if (score >= highscore.Id)
+            if (score >= highscore.Score)
             {
                 return true;
             }

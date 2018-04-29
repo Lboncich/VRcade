@@ -8,6 +8,11 @@ public class ResetBallOutofLegalPosition : MonoBehaviour {
     {
         if (col.gameObject.name == "Bowling_Ball")
         {
+            bool isValid = FindObjectOfType<GameManager>().IsValidThrow;
+            if (isValid)
+            {
+                FindObjectOfType<GameManager>().ApplyMove();
+            }
             FindObjectOfType<GameManager>().IsLegalRegion = false;
             //FindObjectOfType<GameManager>().Resetball();
         }

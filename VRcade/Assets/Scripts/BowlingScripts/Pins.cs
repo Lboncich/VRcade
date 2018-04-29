@@ -8,8 +8,12 @@ public class Pins : MonoBehaviour {
     private List<Transform> pins = new List<Transform>();
     private List<Vector3> startPos = new List<Vector3>();
 
-    private int numPinsDown;
     
+    public int NumPinsDown
+    {
+        get;
+        private set;
+    }
     //private bool isChecked = false;
     GameObject bowlingBall;
 
@@ -40,31 +44,31 @@ public class Pins : MonoBehaviour {
 
     public void CheckPins()
     {
-        //Debug.Log("Checking");
         foreach (Transform child in pins)// loop through the pins
         {
             if (child.GetComponent<BowlingPin>().isDown == true && child.GetComponent<BowlingPin>().isChecked == false) //check if pin is down
             {
                 child.GetComponent<BowlingPin>().isChecked = true;
-                StartCoroutine(setPinsActive(child));
-                numPinsDown++;
+                StartCoroutine(setPinsInactive(child));
+                NumPinsDown++;
                 //textBox.text = "Score:" + numPinsDown;
             }
         }
         
     }
 
-    public IEnumerator setPinsActive(Transform child)
+    public IEnumerator setPinsInactive(Transform child)
     {
         
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         child.gameObject.SetActive(false);
-        if (numPinsDown == pins.Count)
-        {
-            Reset();
-        }
+        //if (NumPinsDown == pins.Count)
+        //{
+        //    Reset();
+        //}
     }
-    void Reset()
+
+    public IEnumerator Reset()
     {
 
         //foreach (Transform child in pins)
@@ -73,6 +77,7 @@ public class Pins : MonoBehaviour {
 
         //    child.rotation = Quaternion.identity;
         //}
+        yield return new WaitForSeconds(3);
         for (int i = 0; i < pins.Count; i++)
         {
          

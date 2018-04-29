@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    
-    public GameObject startingLine;
-
-    public BowlingBall ball;
-
-    //public GameObject legalRegion;
-
-    private bool isValidRoll;
 
     private Bowling bowlingGame;
 
-    public bool IsValidRoll
+    public GameObject startingLine;
+    public BowlingBall ball;
+    public Pins pins;
+    public GameObject notificationCanvas;
+    public GameObject highScoreCanvas;
+
+    private bool isRunning = false;
+    private int currentFrame;
+    
+    public int Score
+    {
+        get; private set;
+    }
+
+    public bool IsValidThrow
     {
         get; set;
     }
@@ -24,37 +31,141 @@ public class GameManager : MonoBehaviour {
     {
         get;set;
     }
+
+   
     void Start()
     {
         bowlingGame = new Bowling();
         IsLegalRegion = true;
+        IsValidThrow = false;
+        currentFrame = 0;
+        Score = 0;
+
     }
     // Update is called once per frame
     void Update () {
 
-        if (!IsLegalRegion)
-        {
-            Resetball();
-            
+       if (!bowlingGame.IsGameOver)
+       {
+            //check if the ball crosses the starting line
+            CheckValidRoll();
+
+            //check if the ball needs to be reset
+            if ((!IsLegalRegion) ||
+                ((ball.GetComponent<Rigidbody>().velocity == Vector3.zero) && IsValidThrow))
+            {
+                StartCoroutine(Resetball());
+            }
+
+
+
+            ///if (IsValidThrow)
+            //{
+            //    if (!isRunning)
+            //    {
+            //        CheckPins();
+
+            //    }
+
+            //    //bowlingGame.ApplyMove(pins.NumPinsDown);
+            //}
         }
+        else
+        {
+            enabled = false;
+            Debug.Log("Game over");
+            Score = bowlingGame.Score;
+            bool isHighScore = FindObjectOfType<HighScoreManager>().IsHighScore(Score);
+            if (isHighScore)
+            {
+                Debug.Log("Is high score");
+
+                highScoreCanvas.transform.Find("HighScore Notification Background").gameObject.
+                    transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(Score.ToString());
+                highScoreCanvas.transform.Find("HighScore Notification Background").gameObject.SetActive(true);
+            }
+            else{
+                Debug.Log("Is not high score");
+                highScoreCanvas.transform.Find("Score Notification Background").gameObject.
+                    transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(Score.ToString());
+                highScoreCanvas.transform.Find("Score Notification Background").gameObject.SetActive(true);
+            }
+
+        }
+        
+
+
         //GameObject bowlingball = GameObject.Find("Bowling_Ball");
-        //if (bowlingball.transform.position.z < startingLine.transform.position.z)//bowling ball is in legal boundary
-        //{
-        //    IsValidRoll = true;
-        //}
-        //else
-        //    IsValidRoll = false;
+        
 
         
     }
 
-    public void Resetball()
+    private IEnumerator Resetball()
     {
         
-        //yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         ball.Reset();
         IsLegalRegion = true;
+        IsValidThrow = false;
     }
-    
 
+    
+    private void CheckValidRoll()
+    {
+        if (ball.transform.position.z < startingLine.transform.position.z)//bowling ball is in legal boundary
+        {
+            IsValidThrow = true;
+        }
+        else
+            IsValidThrow = false;
+    }
+
+    public void ApplyMove()
+    {
+        Debug.Log("Valid Move called");
+        pins.CheckPins();
+        bowlingGame.ApplyMove(pins.NumPinsDown);
+
+        //Debug.Log(bowlingGame.RollType);
+        if (bowlingGame.RollType == "GUTTER")
+        {
+            ActivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
+            DeactivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
+            //notificationCanvas.transform.Find("Gutter").gameObject.SetActive(true);
+        }else if(bowlingGame.RollType == "SPARE")
+        {
+            ActivateObject(notificationCanvas.transform.Find("Spare").gameObject);
+            DeactivateObject(notificationCanvas.transform.Find("Spare").gameObject);
+            //notificationCanvas.transform.Find("Spare").gameObject.SetActive(true);
+        }
+        else if(bowlingGame.RollType == "STRIKE")
+        {
+            ActivateObject(notificationCanvas.transform.Find("Strike").gameObject);
+            DeactivateObject(notificationCanvas.transform.Find("Strike").gameObject);
+            //notificationCanvas.transform.Find("Strike").gameObject.SetActive(true);
+        }
+        if (currentFrame != bowlingGame.CurrentFrame)
+        {
+            Debug.Log(bowlingGame.CurrentFrame);
+            StartCoroutine(pins.Reset());
+            //pins.Reset();
+            currentFrame = bowlingGame.CurrentFrame;
+        }
+        else
+        {
+            Debug.Log("Here");
+        }
+    }
+
+    private void ActivateObject(GameObject g)
+    {
+        g.SetActive(true);
+    }
+
+    private IEnumerator DeactivateObject(GameObject g)
+    {
+        yield return new WaitForSeconds(2);
+        g.SetActive(false);
+    }
 }

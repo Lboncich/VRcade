@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bowling : MonoBehaviour
 {
-    private Frame[] frameList = new Frame[10];
+    private Frame[] frameList = new Frame[2];
 
     private bool IsBonusCalculationDone = true;
     private int bonusPoint = 0;
@@ -25,7 +25,7 @@ public class Bowling : MonoBehaviour
     {
         get
         {
-            return (CurrentFrame >= 10) ? true : false;
+            return (CurrentFrame >= 2) ? true : false;
         }
     }
 
@@ -42,7 +42,7 @@ public class Bowling : MonoBehaviour
    
     public Bowling()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 2; i++)
         {
             frameList[i] = new Frame(i + 1);
 
@@ -93,10 +93,10 @@ public class Bowling : MonoBehaviour
         frameList[CurrentFrame].Roll(numPins);
         UpdateRollType();
 
-        if (frameList[CurrentFrame].CurrentRoll > 1)
+        if ((frameList[CurrentFrame].CurrentRoll > 1)|| (frameList[CurrentFrame].IsStrike))
         {
 
-            if (((frameList[CurrentFrame].IsSpare) || (frameList[CurrentFrame].IsStrike)) && CurrentFrame < 9)
+            if (((frameList[CurrentFrame].IsSpare) || (frameList[CurrentFrame].IsStrike)) && CurrentFrame < 1)
             {
                 IsBonusCalculationDone = false;
             }
