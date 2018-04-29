@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
-public class PauseGame : MonoBehaviour {
+public class PauseGame : MonoBehaviour
+{
     public GameObject pauseMenu;
-    public VRTK_ControllerEvents button;
+    public VRTK_ControllerEvents buttons;
     // Use this for initialization
     void Start () {
 		
@@ -12,10 +14,6 @@ public class PauseGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (button.startMenuPressed)
-        {
-            pauseControl();
-        }
 	}
     public void pauseControl()
     {
@@ -35,5 +33,9 @@ public class PauseGame : MonoBehaviour {
     private void hideMenu()
     {
         pauseMenu.SetActive(false);
+    }
+    public void GripPressed()
+    {
+
     }
 }

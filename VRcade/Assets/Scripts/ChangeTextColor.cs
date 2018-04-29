@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChangeTextColor : MonoBehaviour {
+public class ChangeTextColor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
     public Text colorChange;
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class ChangeTextColor : MonoBehaviour {
 	}
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("BLAH BLAH BLAH");
         colorChange.color = new Color32(0, 0, 0, 255);
     }
     public void OnPointerExit(PointerEventData eventData)
