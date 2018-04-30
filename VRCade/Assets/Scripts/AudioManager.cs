@@ -51,11 +51,11 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("Here");
-        Play("theme");
+        //Play("theme");
     }
     void Update()
     {
-        changeMasterVolume("theme");
+        //changeMasterVolume("theme");
     }
     //Method called to play the sound based on the fileName provided
     public void Play(string soundName)

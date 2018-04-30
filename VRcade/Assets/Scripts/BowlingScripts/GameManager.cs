@@ -125,12 +125,14 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("Valid Move called");
         pins.CheckPins();
+        Debug.Log("Number of pins " + pins.NumPinsDown);
         bowlingGame.ApplyMove(pins.NumPinsDown);
 
         //Debug.Log(bowlingGame.RollType);
         if (bowlingGame.RollType == "GUTTER")
         {
             ActivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
+            FindObjectOfType<AudioManager>().Play("Gutter");
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Gutter").gameObject));
             //notificationCanvas.transform.Find("Gutter").gameObject.SetActive(true);
         }else if(bowlingGame.RollType == "SPARE")
@@ -144,6 +146,14 @@ public class GameManager : MonoBehaviour {
             ActivateObject(notificationCanvas.transform.Find("Strike").gameObject);
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Strike").gameObject));
             //notificationCanvas.transform.Find("Strike").gameObject.SetActive(true);
+        }
+        else
+        {
+            notificationCanvas.transform.Find("Score").gameObject.
+                    transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(pins.NumPinsDown.ToString());
+            ActivateObject(notificationCanvas.transform.Find("Score").gameObject);
+            //FindObjectOfType<AudioManager>().Play("Score");
+            StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Score").gameObject));
         }
         if (currentFrame != bowlingGame.CurrentFrame)
         {

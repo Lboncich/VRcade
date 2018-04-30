@@ -49,7 +49,7 @@ public class Pins : MonoBehaviour {
             if (child.GetComponent<BowlingPin>().isDown == true && child.GetComponent<BowlingPin>().isChecked == false) //check if pin is down
             {
                 child.GetComponent<BowlingPin>().isChecked = true;
-                StartCoroutine(setPinsInactive(child));
+                //StartCoroutine(setPinsInactive(child));
                 NumPinsDown++;
                 //textBox.text = "Score:" + numPinsDown;
             }
@@ -77,6 +77,7 @@ public class Pins : MonoBehaviour {
 
         //    child.rotation = Quaternion.identity;
         //}
+        Debug.Log("Being reset");
         yield return new WaitForSeconds(3);
         for (int i = 0; i < pins.Count; i++)
         {
@@ -85,7 +86,7 @@ public class Pins : MonoBehaviour {
             pins[i].rotation = Quaternion.identity;
             pins[i].GetComponent<BowlingPin>().isChecked = false;
             pins[i].gameObject.SetActive(true);
-       
+            pins[i].GetComponent<BowlingPin>().isDown = false;
 
 
             //for (int i = 0; i < pins.Count; i++)
@@ -98,5 +99,6 @@ public class Pins : MonoBehaviour {
             //  //  R.angularVelocity = Vector3.zero;
             //}
         }
+        NumPinsDown = 0;
     }
 }
