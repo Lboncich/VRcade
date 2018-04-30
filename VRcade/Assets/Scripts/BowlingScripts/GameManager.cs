@@ -131,18 +131,18 @@ public class GameManager : MonoBehaviour {
         if (bowlingGame.RollType == "GUTTER")
         {
             ActivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
-            DeactivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
+            StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Gutter").gameObject));
             //notificationCanvas.transform.Find("Gutter").gameObject.SetActive(true);
         }else if(bowlingGame.RollType == "SPARE")
         {
             ActivateObject(notificationCanvas.transform.Find("Spare").gameObject);
-            DeactivateObject(notificationCanvas.transform.Find("Spare").gameObject);
+            StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Spare").gameObject));
             //notificationCanvas.transform.Find("Spare").gameObject.SetActive(true);
         }
         else if(bowlingGame.RollType == "STRIKE")
         {
             ActivateObject(notificationCanvas.transform.Find("Strike").gameObject);
-            DeactivateObject(notificationCanvas.transform.Find("Strike").gameObject);
+            StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Strike").gameObject));
             //notificationCanvas.transform.Find("Strike").gameObject.SetActive(true);
         }
         if (currentFrame != bowlingGame.CurrentFrame)

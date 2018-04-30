@@ -60,7 +60,7 @@ public class Pins : MonoBehaviour {
     public IEnumerator setPinsInactive(Transform child)
     {
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         child.gameObject.SetActive(false);
         //if (NumPinsDown == pins.Count)
         //{

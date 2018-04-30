@@ -93,7 +93,7 @@ public class Bowling : MonoBehaviour
         frameList[CurrentFrame].Roll(numPins);
         UpdateRollType();
 
-        if ((frameList[CurrentFrame].CurrentRoll > 1)|| (frameList[CurrentFrame].IsStrike))
+        if ((frameList[CurrentFrame].CurrentRoll > 1))
         {
 
             if (((frameList[CurrentFrame].IsSpare) || (frameList[CurrentFrame].IsStrike)) && CurrentFrame < 1)
