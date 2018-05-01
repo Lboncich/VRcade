@@ -44,6 +44,7 @@ public class Pins : MonoBehaviour {
 
     public void CheckPins()
     {
+        NumPinsDown = 0;
         foreach (Transform child in pins)// loop through the pins
         {
             if (child.GetComponent<BowlingPin>().isDown == true && child.GetComponent<BowlingPin>().isChecked == false) //check if pin is down

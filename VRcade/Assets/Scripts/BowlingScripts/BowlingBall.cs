@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BowlingBall : MonoBehaviour {
-    public Vector3 startPosition; //Keep track of where bowling ball starts
+    private Vector3 startPosition; //Keep track of where bowling ball starts
                                   // Use this for initialization
     void Start() {
-        startPosition = transform.position; // Saves position
+        //startPosition = transform.position; // Saves position
+        startPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
     }
 
     // Update is called once per frame

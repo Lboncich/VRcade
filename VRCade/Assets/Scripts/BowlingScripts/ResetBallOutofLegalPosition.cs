@@ -11,7 +11,8 @@ public class ResetBallOutofLegalPosition : MonoBehaviour {
             bool isValid = FindObjectOfType<GameManager>().IsValidThrow;
             if (isValid)
             {
-                FindObjectOfType<GameManager>().ApplyMove();
+                
+                StartCoroutine(FindObjectOfType<GameManager>().ApplyMove());
             }
             FindObjectOfType<GameManager>().IsLegalRegion = false;
             //FindObjectOfType<GameManager>().Resetball();

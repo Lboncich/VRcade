@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour {
             if ((!IsLegalRegion) ||
                 ((ball.GetComponent<Rigidbody>().velocity == Vector3.zero) && IsValidThrow))
             {
-                StartCoroutine(Resetball());
+                //StartCoroutine(Resetball());
+                Resetball();
             }
 
 
@@ -101,10 +102,10 @@ public class GameManager : MonoBehaviour {
         
     }
 
-    private IEnumerator Resetball()
+    private void Resetball()
     {
         
-        yield return new WaitForSeconds(5);
+        //yield return new WaitForSeconds(5);
         ball.Reset();
         IsLegalRegion = true;
         IsValidThrow = false;
@@ -121,18 +122,19 @@ public class GameManager : MonoBehaviour {
             IsValidThrow = false;
     }
 
-    public void ApplyMove()
+    public IEnumerator ApplyMove()
     {
+        yield return new WaitForSeconds(2);
         Debug.Log("Valid Move called");
         pins.CheckPins();
         Debug.Log("Number of pins " + pins.NumPinsDown);
         bowlingGame.ApplyMove(pins.NumPinsDown);
 
-        //Debug.Log(bowlingGame.RollType);
+        Debug.Log(bowlingGame.RollType);
         if (bowlingGame.RollType == "GUTTER")
         {
             ActivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
-            FindObjectOfType<AudioManager>().Play("Gutter");
+            //FindObjectOfType<AudioManager>().Play("Gutter");
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Gutter").gameObject));
             //notificationCanvas.transform.Find("Gutter").gameObject.SetActive(true);
         }else if(bowlingGame.RollType == "SPARE")
@@ -150,22 +152,18 @@ public class GameManager : MonoBehaviour {
         else
         {
             notificationCanvas.transform.Find("Score").gameObject.
-                    transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(pins.NumPinsDown.ToString());
+            transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(pins.NumPinsDown.ToString());
             ActivateObject(notificationCanvas.transform.Find("Score").gameObject);
             //FindObjectOfType<AudioManager>().Play("Score");
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Score").gameObject));
         }
         if (currentFrame != bowlingGame.CurrentFrame)
         {
-            Debug.Log(bowlingGame.CurrentFrame);
             StartCoroutine(pins.Reset());
             //pins.Reset();
             currentFrame = bowlingGame.CurrentFrame;
         }
-        else
-        {
-            Debug.Log("Here");
-        }
+        
     }
 
     private void ActivateObject(GameObject g)
