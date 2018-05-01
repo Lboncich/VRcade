@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
         IsValidThrow = false;
         currentFrame = 0;
         Score = 0;
-
+        
     }
     // Update is called once per frame
     void Update () {
@@ -130,16 +130,18 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Number of pins " + pins.NumPinsDown);
         bowlingGame.ApplyMove(pins.NumPinsDown);
 
+        StartCoroutine(pins.setPinsInactive());
         Debug.Log(bowlingGame.RollType);
         if (bowlingGame.RollType == "GUTTER")
         {
             ActivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
-            //FindObjectOfType<AudioManager>().Play("Gutter");
+            FindObjectOfType<AudioManager>().Play("Gutter");
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Gutter").gameObject));
             //notificationCanvas.transform.Find("Gutter").gameObject.SetActive(true);
         }else if(bowlingGame.RollType == "SPARE")
         {
             ActivateObject(notificationCanvas.transform.Find("Spare").gameObject);
+            
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Spare").gameObject));
             //notificationCanvas.transform.Find("Spare").gameObject.SetActive(true);
         }
@@ -154,7 +156,7 @@ public class GameManager : MonoBehaviour {
             notificationCanvas.transform.Find("Score").gameObject.
             transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(pins.NumPinsDown.ToString());
             ActivateObject(notificationCanvas.transform.Find("Score").gameObject);
-            //FindObjectOfType<AudioManager>().Play("Score");
+            FindObjectOfType<AudioManager>().Play("Score");
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Score").gameObject));
         }
         if (currentFrame != bowlingGame.CurrentFrame)

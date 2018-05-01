@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
         }
 
         //Method to avoid the destruction of audioManager when scenes change
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         //for each sound that are listed, different options should be available. 
         foreach (Sound s in sounds)

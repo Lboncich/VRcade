@@ -58,11 +58,18 @@ public class Pins : MonoBehaviour {
         
     }
 
-    public IEnumerator setPinsInactive(Transform child)
+    public IEnumerator setPinsInactive()
     {
         
-        yield return new WaitForSeconds(1);
-        child.gameObject.SetActive(false);
+        yield return new WaitForSeconds(2);
+        foreach (Transform child in pins)
+        {
+            if (child.GetComponent<BowlingPin>().isDown == true)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        
         //if (NumPinsDown == pins.Count)
         //{
         //    Reset();
