@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public Pins pins;
     public GameObject notificationCanvas;
     public GameObject highScoreCanvas;
+    public GameObject generalInfoCanvas;
 
     private bool isRunning = false;
     private int currentFrame;
@@ -58,18 +59,14 @@ public class GameManager : MonoBehaviour {
                 Resetball();
             }
 
+            //update the frame and roll number
+            generalInfoCanvas.transform.Find("Frame").gameObject.
+            transform.Find("Frame Number").gameObject.GetComponent<TextMeshProUGUI>().SetText((currentFrame+1).ToString());
+
+            generalInfoCanvas.transform.Find("Roll").gameObject.
+            transform.Find("Roll Number").gameObject.GetComponent<TextMeshProUGUI>().SetText((bowlingGame.CurrentRoll + 1).ToString());
 
 
-            ///if (IsValidThrow)
-            //{
-            //    if (!isRunning)
-            //    {
-            //        CheckPins();
-
-            //    }
-
-            //    //bowlingGame.ApplyMove(pins.NumPinsDown);
-            //}
         }
         else
         {
