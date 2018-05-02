@@ -7,8 +7,8 @@ public class BowlingPin : MonoBehaviour
 
 
     //
-    public AudioSource hitSource;
-    //
+    public AudioSource randomSound;
+    public AudioClip[] audioSources;
     public Transform pin;
     //threshold is how far the pin must fall in order to count as being downed
     public float threshhold = .7f;
@@ -21,7 +21,7 @@ public class BowlingPin : MonoBehaviour
 
     void Start()
     {
-        hitSource = GetComponent<AudioSource>();
+        randomSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,8 +39,9 @@ public class BowlingPin : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {
-        hitSource.Play();
-        
+        randomSound.clip = audioSources[Random.Range(0, audioSources.Length)];
+        randomSound.Play();
+
     }
      
 }
