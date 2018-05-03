@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ChangeTextOnHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-
+    public Color32 desiredColor;
+    public Color32 originalColor;
     public Text textToChange;
     // Use this for initialization
     void Start () {
@@ -19,11 +20,11 @@ public class ChangeTextOnHighlight : MonoBehaviour, IPointerEnterHandler, IPoint
 	}
     public void OnPointerEnter(PointerEventData eventData)
     {
-        textToChange.color = new Color32(0, 0, 0, 255);
+        textToChange.color = desiredColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        textToChange.color = new Color32(27, 118, 31, 255);
+        textToChange.color = originalColor;
     }
 }
