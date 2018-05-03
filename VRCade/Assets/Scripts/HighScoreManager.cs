@@ -195,7 +195,6 @@ public class HighScoreManager : MonoBehaviour
 
         GetScore();
         DeleteChildren();
-
         for (int i = 0; i < highScoreList.Count; i++)
         {
             GameObject tempObject = GameObject.Instantiate(scorePrefab);

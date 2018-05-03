@@ -10,7 +10,7 @@ public class CheckPinAfterCollision : MonoBehaviour {
         {
             Debug.Log("Enter");
             //StartCoroutine(GetComponent<Pins>().CheckPins());
-            GetComponent<GameManager>().IsLegalRegion = true;
+            //GetComponent<GameManager>().IsLegalRegion = true;
         }
     }
 }

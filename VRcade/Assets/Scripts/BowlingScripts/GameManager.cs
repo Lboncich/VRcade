@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour {
             Score = bowlingGame.Score;
             
             bool isHighScore = FindObjectOfType<HighScoreManager>().IsHighScore(Score);
+            isHighScore = (Score == 0) ? false : true;
+
             Debug.Log(isHighScore);
             if (isHighScore)
             {
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour {
                 highScoreCanvas.transform.Find("HighScore Notification Background").gameObject.
                     transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(Score.ToString());
                 highScoreCanvas.transform.Find("HighScore Notification Background").gameObject.SetActive(true);
+                FindObjectOfType<AudioManager>().Play("Score");
             }
             else{
                 Debug.Log("Is not high score");
@@ -153,7 +156,6 @@ if (bowlingGame.RollType == "GUTTER")
             notificationCanvas.transform.Find("Score").gameObject.
             transform.Find("SCORE").gameObject.GetComponent<TextMeshProUGUI>().SetText(pins.NumPinsDown.ToString());
             ActivateObject(notificationCanvas.transform.Find("Score").gameObject);
-            FindObjectOfType<AudioManager>().Play("Score");
             StartCoroutine(DeactivateObject(notificationCanvas.transform.Find("Score").gameObject));
         }
         if (currentFrame != bowlingGame.CurrentFrame)
