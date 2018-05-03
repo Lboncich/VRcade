@@ -73,7 +73,9 @@ public class GameManager : MonoBehaviour {
             enabled = false;
             Debug.Log("Game over");
             Score = bowlingGame.Score;
+            
             bool isHighScore = FindObjectOfType<HighScoreManager>().IsHighScore(Score);
+            Debug.Log(isHighScore);
             if (isHighScore)
             {
                 Debug.Log("Is high score");
@@ -122,14 +124,12 @@ public class GameManager : MonoBehaviour {
     public IEnumerator ApplyMove()
     {
         yield return new WaitForSeconds(2);
-        Debug.Log("Valid Move called");
         pins.CheckPins();
-        Debug.Log("Number of pins " + pins.NumPinsDown);
         bowlingGame.ApplyMove(pins.NumPinsDown);
 
         StartCoroutine(pins.setPinsInactive());
-        Debug.Log(bowlingGame.RollType);
-        if (bowlingGame.RollType == "GUTTER")
+        
+if (bowlingGame.RollType == "GUTTER")
         {
             ActivateObject(notificationCanvas.transform.Find("Gutter").gameObject);
             FindObjectOfType<AudioManager>().Play("Gutter");

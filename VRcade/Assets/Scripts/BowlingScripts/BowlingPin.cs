@@ -39,7 +39,7 @@ public class BowlingPin : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {
-        randomSound.clip = audioSources[Random.Range(0, audioSources.Length)];
+        //randomSound.clip = audioSources[Random.Range(0, audioSources.Length)];
         randomSound.Play();
 
     }

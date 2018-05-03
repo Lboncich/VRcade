@@ -171,10 +171,14 @@ public class HighScoreManager : MonoBehaviour
     {
 
         GetScore();
+        {
+            return true;
+        }
         foreach (HighScore highscore in highScoreList)
         {
             if (score >= highscore.Score)
             {
+                Debug.Log("Here");
                 return true;
             }
 
