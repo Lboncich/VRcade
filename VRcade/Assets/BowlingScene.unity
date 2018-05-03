@@ -599,10 +599,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4278190080
   originalColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4280251931
   textToChange: {fileID: 1607655275}
 --- !u!1 &19559421
 GameObject:
@@ -2178,7 +2178,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh35988
+  m_Name: pb_Mesh20210
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -21842,7 +21842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &247190044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23052,7 +23052,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh36990
+  m_Name: pb_Mesh21212
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -33902,7 +33902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bb: {fileID: 1121999009}
-  pauseCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 247190043}
 --- !u!114 &502583067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34428,7 +34428,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 517846223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: -0.063, y: 0, z: -1.678}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1753781342}
@@ -45727,11 +45727,6 @@ Prefab:
       propertyPath: m_Mass
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 54446475983642434, guid: d84d498a9d6bb67438f7419aaf303d07,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 23539987103023940, guid: d84d498a9d6bb67438f7419aaf303d07,
         type: 2}
       propertyPath: m_Enabled
@@ -45820,6 +45815,26 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114784584635148974, guid: d84d498a9d6bb67438f7419aaf303d07,
+        type: 2}
+      propertyPath: precisionGrab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54446475983642434, guid: d84d498a9d6bb67438f7419aaf303d07,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114470381473637954, guid: d84d498a9d6bb67438f7419aaf303d07,
+        type: 2}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 1121999011}
+    - target: {fileID: 114470381473637954, guid: d84d498a9d6bb67438f7419aaf303d07,
+        type: 2}
+      propertyPath: initalHit
+      value: 
+      objectReference: {fileID: 1121999019}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d84d498a9d6bb67438f7419aaf303d07, type: 2}
   m_IsPrefabParent: 0
@@ -45843,9 +45858,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 370fbe26373f02049b50a33c0a237305, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 800abe9e1e9b0e244b41ec62ca8c1f19, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.642
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -45902,6 +45917,91 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!54 &1121999011 stripped
+Rigidbody:
+  m_PrefabParentObject: {fileID: 54446475983642434, guid: d84d498a9d6bb67438f7419aaf303d07,
+    type: 2}
+  m_PrefabInternal: {fileID: 1121999007}
+--- !u!82 &1121999019
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121999008}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 18188ff361b5d61448075c13780a367b, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 256
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -66908,10 +67008,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4278190080
   originalColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4280251931
   textToChange: {fileID: 636239093}
 --- !u!1 &1529752677
 GameObject:
@@ -81654,17 +81754,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4278190080
   originalColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4280251931
   textToChange: {fileID: 1877904172}
 --- !u!43 &1896178094
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh37142
+  m_Name: pb_Mesh21364
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -82302,7 +82402,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomSound: {fileID: 0}
-  audioSources: []
+  audioSources:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pin: {fileID: 1946197384}
   threshhold: 0.6
   point: 1
@@ -83994,10 +84104,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4278190080
   originalColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4280251931
   textToChange: {fileID: 1109969475}
 --- !u!1 &2047972325
 GameObject:

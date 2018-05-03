@@ -7,14 +7,23 @@ public class BowlingBall : MonoBehaviour {
    public Rigidbody rigidBody;
     // Use this for initialization
     public AudioSource ballSoundSource;
+    public AudioSource initalHit;
+    
     public Vector3 vel;
     public float speed;
+    public bool isDropped = false;
 
     void Start() {
         //startPosition = transform.position; // Saves position
         rigidBody = GetComponent<Rigidbody>();
-        ballSoundSource = GetComponent<AudioSource>();
+        //ballSoundSource = GetComponent<AudioSource>();
+        //initalHit = GetComponent<AudioSource>();
+       // ballSoundSource = aSources[0];
+        var aSources = GetComponents<AudioSource>();
+        ballSoundSource = aSources[0];
+        initalHit = aSources[1];
         startPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+  
     }
 
     // Update is called once per frame
@@ -39,13 +48,30 @@ public class BowlingBall : MonoBehaviour {
 
     void OnCollisionStay(Collision collision)
     {
-        if (ballSoundSource.isPlaying == false && speed >= 0.1f && collision.gameObject.tag == "Ground")
+        if(!isDropped)
         {
-            ballSoundSource.Play();
+            initalHit.Play();
+            isDropped = true;
+            Debug.Log("testing");
+
         }
-        else if (ballSoundSource.isPlaying == true && speed < 0.1f && collision.gameObject.tag == "Ground")
+        /* if (ballSoundSource.isPlaying == false && speed >= 0.1f && collision.gameObject.tag == "Our Lane")
+         {
+             ballSoundSource.Play();
+
+         }
+         else if (ballSoundSource.isPlaying == true && speed < 0.1f && collision.gameObject.tag == "Our Lanes")
+         {
+             ballSoundSource.Pause();
+         }
+         */
+        if (speed >= 1f && ballSoundSource.isPlaying == false)
         {
-            ballSoundSource.Pause();
+           // ballSoundSource.Play();
+        }
+        else if (speed < 0.5f && ballSoundSource.isPlaying == true )
+        {
+            //ballSoundSource.Pause();
         }
     }
 
