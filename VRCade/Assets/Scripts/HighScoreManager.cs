@@ -171,6 +171,7 @@ public class HighScoreManager : MonoBehaviour
     {
 
         GetScore();
+        if (highScoreList.Count < 20)
         {
             return true;
         }
