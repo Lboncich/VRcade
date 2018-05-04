@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 public class ToggleBumperAnimation : MonoBehaviour {
-    public Animation rBumpIn;
-    public Animation rBumpOut;
-    public Animation lBumpIn;
-    public Animation lBumpOut;
+    public Animator rBumpIn;
+    public Animator rBumpOut;
+    public Animator lBumpIn;
+    public Animator lBumpOut;
     // Use this for initialization
     void Start () {
 		
@@ -17,12 +17,12 @@ public class ToggleBumperAnimation : MonoBehaviour {
 	}
     private void bumpersIn()
     {
-        rBumpIn = GetComponent<Animation>();
-        lBumpIn = GetComponent<Animation>();
+        rBumpIn = GetComponent<Animator>();
+        lBumpIn = GetComponent<Animator>();
     }
     private void bumpersOut()
     {
-        rBumpOut = GetComponent<Animation>();
-        lBumpOut = GetComponent<Animation>();
+        rBumpOut = GetComponent<Animator>();
+        lBumpOut = GetComponent<Animator>();
     }
 }
