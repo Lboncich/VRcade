@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class AudioManager : MonoBehaviour
             s.source.minDistance = s.minDistance;
             s.source.maxDistance = s.maxDistance;
         }
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            Play("BGM");
     }
 
     //default sound track when the game starts

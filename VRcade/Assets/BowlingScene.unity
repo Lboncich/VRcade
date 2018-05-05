@@ -83585,7 +83585,7 @@ Prefab:
     - target: {fileID: 114492762396378910, guid: a7a6e79a9992fd849a2039808da84c3a,
         type: 2}
       propertyPath: sounds.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4551770345232350, guid: a7a6e79a9992fd849a2039808da84c3a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -83663,6 +83663,31 @@ Prefab:
         type: 2}
       propertyPath: sounds.Array.data[1].spatialBlend
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492762396378910, guid: a7a6e79a9992fd849a2039808da84c3a,
+        type: 2}
+      propertyPath: sounds.Array.data[2].name
+      value: BGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492762396378910, guid: a7a6e79a9992fd849a2039808da84c3a,
+        type: 2}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d64761a04ae6cdd47b96f698c1960a79, type: 3}
+    - target: {fileID: 114492762396378910, guid: a7a6e79a9992fd849a2039808da84c3a,
+        type: 2}
+      propertyPath: sounds.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492762396378910, guid: a7a6e79a9992fd849a2039808da84c3a,
+        type: 2}
+      propertyPath: sounds.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492762396378910, guid: a7a6e79a9992fd849a2039808da84c3a,
+        type: 2}
+      propertyPath: sounds.Array.data[2].loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7a6e79a9992fd849a2039808da84c3a, type: 2}
