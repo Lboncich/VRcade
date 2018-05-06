@@ -44,12 +44,16 @@ public class BowlingBall : MonoBehaviour {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         transform.position = startPosition;
+        isDropped = false;
     }
 
     void OnCollisionStay(Collision collision)
     {
-        if(!isDropped)
+        if(!isDropped && collision.gameObject.tag == "Lane")
         {
+            initalHit.Play();
+            initalHit.Play();
+            initalHit.Play();
             initalHit.Play();
             isDropped = true;
             Debug.Log("testing");
@@ -67,17 +71,17 @@ public class BowlingBall : MonoBehaviour {
          */
         if (speed >= 1f && ballSoundSource.isPlaying == false)
         {
-           // ballSoundSource.Play();
+           ballSoundSource.Play();
         }
         else if (speed < 0.5f && ballSoundSource.isPlaying == true )
         {
-            //ballSoundSource.Pause();
+            ballSoundSource.Pause();
         }
     }
 
   void OnCollisionExit(Collision collision)
     {
-        if (ballSoundSource.isPlaying == true && collision.gameObject.tag == "Ground")
+        if (ballSoundSource.isPlaying == true && collision.gameObject.tag == "Lane")
         {
             ballSoundSource.Pause();
         }

@@ -15,6 +15,7 @@ public class BowlingPin : MonoBehaviour
     public int point = 1;
     public bool isDown = false;
     public bool isChecked = false;
+    public bool isPlayed = false;
     //public Score score
     // Use this for initialization
 
@@ -22,11 +23,15 @@ public class BowlingPin : MonoBehaviour
     void Start()
     {
         randomSound = GetComponent<AudioSource>();
+        randomSound.clip = audioSources[Random.Range(0, audioSources.Length)];
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+ 
+
 
         if (pin.up.y < threshhold)
         {
@@ -37,12 +42,18 @@ public class BowlingPin : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter (Collision collision)
+    void OnCollisionEnter(Collision col)
     {
-       // randomSound.clip = audioSources[Random.Range(0, audioSources.Length)];
-        randomSound.Play();
-
-    }
-     
+    
+        Debug.Log(col.collider.tag);
+       if(!col.collider.gameObject.CompareTag("Lane"))
+        {
+            if (isPlayed == false)
+            {
+                randomSound.Play();
+                isPlayed = true;
+            }
+        }
+    }    
 }
 

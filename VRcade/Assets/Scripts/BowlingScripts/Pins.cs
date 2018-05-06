@@ -95,6 +95,7 @@ public class Pins : MonoBehaviour {
             pins[i].GetComponent<BowlingPin>().isChecked = false;
             pins[i].gameObject.SetActive(true);
             pins[i].GetComponent<BowlingPin>().isDown = false;
+            pins[i].GetComponent<BowlingPin>().isPlayed = false;
 
 
             //for (int i = 0; i < pins.Count; i++)
