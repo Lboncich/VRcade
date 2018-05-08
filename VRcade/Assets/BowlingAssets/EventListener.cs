@@ -8,7 +8,7 @@ using System;
 public class EventListener : MonoBehaviour
     {
 
-    public BowlingBall bb;
+   // public BowlingBall bb;
     public GameObject pauseCanvas;
     //public List<GameObject> bbs;
     //System.Random rnd = new System.Random();
