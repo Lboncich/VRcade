@@ -58,7 +58,8 @@ public class AudioManager : MonoBehaviour
     }
     void Update()
     {
-        //changeMasterVolume("theme");
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            changeMasterVolume("BGM");
     }
     //Method called to play the sound based on the fileName provided
     public void Play(string soundName)

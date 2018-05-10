@@ -426,6 +426,7 @@ namespace VRTK
                 controller.SubscribeToButtonAliasEvent(selectionButton, true, DoSelectionButtonPressed);
                 controller.SubscribeToButtonAliasEvent(selectionButton, false, DoSelectionButtonReleased);
             }
+            
         }
 
         protected virtual void OnDisable()

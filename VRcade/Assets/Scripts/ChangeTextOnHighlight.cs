@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChangeTextOnHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class ChangeTextOnHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+{
     public Color32 desiredColor;
     public Color32 originalColor;
     public Text textToChange;
@@ -24,6 +25,11 @@ public class ChangeTextOnHighlight : MonoBehaviour, IPointerEnterHandler, IPoint
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        textToChange.color = originalColor;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
     {
         textToChange.color = originalColor;
     }

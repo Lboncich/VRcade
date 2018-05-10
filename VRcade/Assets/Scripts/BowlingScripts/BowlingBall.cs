@@ -47,6 +47,7 @@ public class BowlingBall : MonoBehaviour {
         isDropped = false;
     }
 
+    
     void OnCollisionStay(Collision collision)
     {
         if(!isDropped && collision.gameObject.tag == "Lane")
@@ -59,7 +60,7 @@ public class BowlingBall : MonoBehaviour {
             Debug.Log("testing");
 
         }
-        /* if (ballSoundSource.isPlaying == false && speed >= 0.1f && collision.gameObject.tag == "Our Lane")
+        if (ballSoundSource.isPlaying == false && speed >= 0.1f && collision.gameObject.tag == "Our Lane")
          {
              ballSoundSource.Play();
 
@@ -68,7 +69,7 @@ public class BowlingBall : MonoBehaviour {
          {
              ballSoundSource.Pause();
          }
-         */
+         
         if (speed >= 1f && ballSoundSource.isPlaying == false)
         {
            ballSoundSource.Play();

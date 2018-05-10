@@ -1,18 +1,13 @@
 ﻿
-using NUnit.Framework;
-using System.Collections.Generic;
+
 using UnityEngine;
 using VRTK;
-using System;
 
 public class EventListener : MonoBehaviour
     {
-
-   // public BowlingBall bb;
+    
     public GameObject pauseCanvas;
-    //public List<GameObject> bbs;
-    //System.Random rnd = new System.Random();
-
+    private bool switcher = true;
     private void Start()
     {
         
@@ -21,10 +16,17 @@ public class EventListener : MonoBehaviour
             VRTK_Logger.Error(VRTK_Logger.GetCommonMessage(VRTK_Logger.CommonMessageKeys.REQUIRED_COMPONENT_MISSING_FROM_GAMEOBJECT, "VRTK_ControllerEvents_ListenerExample", "VRTK_ControllerEvents", "the same"));
             return;
         }
-        GetComponent<VRTK_ControllerEvents>().ButtonOneTouchStart += new ControllerInteractionEventHandler(DoButtonOneTouchStart);
-        GetComponent<VRTK_ControllerEvents>().ButtonOneTouchEnd += new ControllerInteractionEventHandler(DoButtonOneTouchEnd);
+       // GetComponent<VRTK_ControllerEvents>().ButtonOneTouchStart += new ControllerInteractionEventHandler(DoButtonOneTouchStart);
+        //GetComponent<VRTK_ControllerEvents>().ButtonOneTouchEnd += new ControllerInteractionEventHandler(DoButtonOneTouchEnd);
         GetComponent<VRTK_ControllerEvents>().ButtonTwoPressed += new ControllerInteractionEventHandler(DoButtonTwoTouched);
+        GetComponent<VRTK_ControllerEvents>().ButtonOnePressed += new ControllerInteractionEventHandler(TerminateTutorialCanvas);
 
+    }
+    private void TerminateTutorialCanvas(object sender, ControllerInteractionEventArgs e)
+    {
+        GameObject tutCanvas = GameObject.FindGameObjectWithTag("Tutorial");
+        switcher = false;
+        tutCanvas.gameObject.SetActive(false);
     }
     private void DoButtonTwoTouched(object sender, ControllerInteractionEventArgs e)
     {
